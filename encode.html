@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Happy Birthday Encoder</title>
+<body>
+    <header>
+        <p class="logo">Happy Birthday Encoder<span>You can encode text. <a href="decode.html">Decoder is here.</a></span></p>
+    </header>
+    <main>
+        <br></nr>
+        <label>
+            <textarea id="encrypted" class="textbox-001" placeholder="Please put text you want to encrypt here."></textarea>
+        </label>
+        <button class="button-002" onclick="convert()">Convert</button>
+        <br>
+        <div class="box-009">
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="23" height="23">
+                    <path fill="#86d67c"
+                          d="M8.2,20.6l-7.8-7.8c-0.5-0.5-0.5-1.2,0-1.7L2,9.4c0.5-0.5,1.2-0.5,1.7,0L9,14.7L20.3,3.4c0.5-0.5,1.2-0.5,1.7,0l1.7,1.7  c0.5,0.5,0.5,1.2,0,1.7L9.8,20.6C9.4,21.1,8.6,21.1,8.2,20.6L8.2,20.6z"/>
+                </svg>
+                Converted Text
+            </div>
+            <p id="converted">Converted Text will shown here.</p>
+        </div>
+    </main>
+    <script>
+        
+
+        function encodeMorse(text) {
+            const morseCodeMap = {
+    "A": ".-", "B": "-...", "C": "-.-.", "D": "-..", "E": ".",
+    "F": "..-.", "G": "--.", "H": "....", "I": "..", "J": ".---",
+    "K": "-.-", "L": ".-..", "M": "--", "N": "-.", "O": "---",
+    "P": ".--.", "Q": "--.-", "R": ".-.", "S": "...", "T": "-",
+    "U": "..-", "V": "...-", "W": ".--", "X": "-..-", "Y": "-.--",
+    "Z": "--..", "1": ".----", "2": "..---", "3": "...--", "4": "....-",
+    "5": ".....", "6": "-....", "7": "--...", "8": "---..", "9": "----.",
+    "0": "-----", ",": "--..--", ".": ".-.-.-", "?": "..--..", "/": "-..-.",
+    "-": "-....-", "(": "-.--.", ")": "-.--.-", "\"": ".-..-.", "'": ".----.",
+    "!": "-.-.--", "=": "-...-", "+": ".-.-.", ":": "-..-.-", ";": "-.-.-.",
+    "_": "..--.-", "&": ".-...", "$": "...-..-", "@": ".--.-."
+  };
+
+  return text.toUpperCase().split("").map(char => morseCodeMap[char] || " ").join(" ");
+        }
+
+        function encodeASCII(str) {
+            let hex = '';
+            for (let i = 0; i < str.length; i++) {
+                hex += str.charCodeAt(i).toString(16); // ASCII文字を16進数に変換
+            }
+            return hex;
+        }
+
+        function convert(){
+            document.getElementById('converted').innerHTML = "Processing."
+
+            let text = document.getElementById('encrypted').value;
+
+            text = encodeASCII(text);
+            text = encodeMorse(text);
+            
+            
+
+            document.getElementById('converted').innerHTML=text;
+            //document.getElementById('converted').innerHTML="test";
+
+            //alert(text);
+        }
+    </script>
+</body>
+</html>
